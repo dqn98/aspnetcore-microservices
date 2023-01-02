@@ -20,6 +20,8 @@ namespace Product.API.Controllers
             _mapper = mapper;
         }
 
+
+
         #region CRUD
         [HttpGet]
         public async Task<IActionResult> GetProducts()

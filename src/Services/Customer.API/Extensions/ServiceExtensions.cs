@@ -1,5 +1,9 @@
 ﻿using Contracts.Common.Interfaces;
 using Customer.API.Persistence;
+using Customer.API.Repositories;
+using Customer.API.Repositories.Interfaces;
+using Customer.API.Services;
+using Customer.API.Services.Interfaces;
 using Infrastructure.Common;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +20,7 @@ namespace Customer.API.Extensions
             services.AddSwaggerGen();
             services.ConfigureProductDbContext(configuration);
             services.AddInfrastructureServices();
-            //services.AddAutoMapper(cfg => cfg.AddProfile(new MappingProfile()));
+            services.AddAutoMapper(cfg => cfg.AddProfile(new MappingProfile()));
 
             return services;
         }
@@ -32,8 +36,10 @@ namespace Customer.API.Extensions
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
             return services.AddScoped(typeof(IRepositoryBaseAsync<,,>), typeof(RepositoryBaseAsync<,,>))
-                .AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
-                //.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
+                .AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>))
+                .AddScoped(typeof(ICustomerRepository), typeof(CustomerRepository))
+                
+                .AddScoped(typeof(ICustomerServices), typeof(CustomerServices));
         }
     }
 }

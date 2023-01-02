@@ -4,6 +4,7 @@
     {
         public static void UseInfrastructure(this IApplicationBuilder app)
         {
+
             app.UseSwagger();
             app.UseSwaggerUI();
 

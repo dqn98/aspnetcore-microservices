@@ -1,6 +1,8 @@
 using Common.Logging;
+using Customer.API.Controllers;
 using Customer.API.Extensions;
 using Customer.API.Persistence;
+using Customer.API.Services.Interfaces;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +18,8 @@ try
     //Add services to the container
     builder.Services.AddInfrastructure(builder.Configuration);
     var app = builder.Build();
+
+    app.MapCustomerAPI();
     app.UseInfrastructure();
 
     app.MigrateDatabase<CustomerContext>((context, _) 
@@ -23,6 +27,7 @@ try
     { 
     });
     app.SeedCustomerData();
+    app.Run();
 }
 catch (Exception ex)
 {

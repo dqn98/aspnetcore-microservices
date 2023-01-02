@@ -1,13 +1,9 @@
 ﻿using Contracts.Common.Interfaces;
+using Customer.API.Persistence;
 using Infrastructure.Common;
 using Microsoft.EntityFrameworkCore;
-using MySqlConnector;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
-using Product.API.Persistence;
-using Product.API.Reposiories;
-using Product.API.Reposiories.Interfaces;
 
-namespace Product.API.Extensions
+namespace Customer.API.Extensions
 {
     public static class ServiceExtensions
     {
@@ -20,7 +16,7 @@ namespace Product.API.Extensions
             services.AddSwaggerGen();
             services.ConfigureProductDbContext(configuration);
             services.AddInfrastructureServices();
-            services.AddAutoMapper(cfg => cfg.AddProfile(new MappingProfile()));
+            //services.AddAutoMapper(cfg => cfg.AddProfile(new MappingProfile()));
 
             return services;
         }
@@ -29,23 +25,15 @@ namespace Product.API.Extensions
         {
             var connectionString = configuration.GetConnectionString("DefaultConnectionString");
 
-            var builder = new MySqlConnectionStringBuilder(connectionString);
-
-            services.AddDbContext<ProductContext>(m => m.UseMySql(builder.ConnectionString,
-                ServerVersion.AutoDetect(builder.ConnectionString), e =>
-                {
-                    e.MigrationsAssembly("Product.API");
-                    e.SchemaBehavior(MySqlSchemaBehavior.Ignore);
-                }));
-
+            services.AddDbContext<CustomerContext>(m => m.UseNpgsql(connectionString));
             return services;
         }
 
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
             return services.AddScoped(typeof(IRepositoryBaseAsync<,,>), typeof(RepositoryBaseAsync<,,>))
-                .AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>))
-                .AddScoped(typeof(IProductRepository), typeof(ProductRepository));
+                .AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
+                //.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
         }
     }
 }

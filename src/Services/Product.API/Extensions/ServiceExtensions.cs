@@ -43,7 +43,7 @@ namespace Product.API.Extensions
 
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
-            return services.AddScoped(typeof(IRepositoryBaseAsync<,,>), typeof(RepositoryBaseAsync<,,>))
+            return services.AddScoped(typeof(IRepositoryBaseAsync<,,>), typeof(RepositoryBase<,,>))
                 .AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>))
                 .AddScoped(typeof(IProductRepository), typeof(ProductRepository));
         }

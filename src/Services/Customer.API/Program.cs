@@ -5,10 +5,13 @@ using Customer.API.Persistence;
 using Customer.API.Services.Interfaces;
 using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
-builder.Host.UseSerilog(Serilogger.Configure);
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
 
-Log.Information("Starting Customer API up");
+var builder = WebApplication.CreateBuilder(args);
+
+Log.Information($"Start {builder.Environment.ApplicationName} up");
 
 try
 {

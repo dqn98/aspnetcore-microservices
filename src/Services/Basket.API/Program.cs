@@ -1,15 +1,23 @@
+using Basket.API.Extensions;
 using Common.Logging;
 using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
-builder.Host.UseSerilog(Serilogger.Configure);
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
 
-Log.Information("Starting Basket API up");
+var builder = WebApplication.CreateBuilder(args);
+
+Log.Information($"Start {builder.Environment.ApplicationName} up");
 
 try
 {
+    builder.Host.UseSerilog(Serilogger.Configure);
+    builder.Host.AddAppConfigurations();
     // Add services to the container.
-
+    builder.Services.ConfigureServices();
+    builder.Services.ConfigureRedis(builder.Configuration);
+    builder.Services.Configure<RouteOptions>(options => options.LowercaseQueryStrings = true);
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
@@ -31,13 +39,11 @@ try
     app.MapControllers();
 
     app.Run();
-
 }
 catch (Exception ex)
 {
     Log.Fatal(ex, "Unhandle exception");
 }
-
 finally
 {
     Log.Information("Shut down Product API complete");

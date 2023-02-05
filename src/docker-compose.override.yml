@@ -105,7 +105,7 @@ services:
       - elasticsearch
     ports:
       - "5601:5601"
-            
+      
       
   #microservices api sections
   product.api:
@@ -119,7 +119,7 @@ services:
     ports:
       - "6002:80"
     restart: always
-
+    
   customer.api:
     container_name: customer.api
     environment:
@@ -130,4 +130,16 @@ services:
       - customerdb
     ports:
       - "6003:80"
+    restart: always
+  
+  basket.api:
+    container_name: basket.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - "CacheSettings:ConnectionString=basketdb:6379"
+    depends_on: 
+      - basketdb
+    ports:
+      - "6004:80"
     restart: always

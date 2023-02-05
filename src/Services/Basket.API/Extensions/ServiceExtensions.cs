@@ -3,26 +3,25 @@ using Basket.API.Repositories.Interfaces;
 using Contracts.Common.Interfaces;
 using Infrastructure.Common;
 
-namespace Basket.API.Extensions
+namespace Basket.API.Extensions;
+
+public static class ServiceExtensions
 {
-    public static class ServiceExtensions
+    public static IServiceCollection ConfigureServices(this IServiceCollection services) =>
+        services.AddScoped<IBasketRepository, BasketRepository>()
+            .AddTransient<ISerializeService, SerializeService>()
+        ;
+
+    public static void ConfigureRedis(this IServiceCollection services, IConfiguration configuration)
     {
-        public static IServiceCollection ConfigureServices(this IServiceCollection services) =>
-            services.AddScoped<IBasketRepository, BasketRepository>()
-            .AddTransient<ISerializeService, SerializeService>();
+        var redisConnectionString = configuration.GetSection("CacheSettings:ConnectionString").Value;
+        if (string.IsNullOrEmpty(redisConnectionString))
+            throw new ArgumentNullException("Redis Connection string is not configured.");
 
-        public static void ConfigureRedis(this IServiceCollection services, IConfiguration configuration)
+        //Redis Configuration
+        services.AddStackExchangeRedisCache(options =>
         {
-            var redisConnectionString = configuration.GetSection("CacheSettings:ConnectionString").Value;
-            if (string.IsNullOrEmpty(redisConnectionString))
-            {
-                throw new ArgumentException("Redis connection string is not configured");
-                }
-
-            services.AddStackExchangeRedisCache(options =>
-            {
-                options.Configuration = redisConnectionString;
-            });
-        }
+            options.Configuration = redisConnectionString;
+        });
     }
 }

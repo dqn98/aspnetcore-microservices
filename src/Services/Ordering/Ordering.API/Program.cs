@@ -1,15 +1,17 @@
 using Common.Logging;
+using Ordering.Infrastructure;
+using Ordering.Infrastructure.Persistence;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog(Serilogger.Configure);
 
-Log.Information("Starting Ordering API up");
+Log.Information("Starting Order API up");
 
 try
 {
     // Add services to the container.
-
+    builder.Services.AddInfrastructureServices(builder.Configuration);
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
@@ -24,6 +26,14 @@ try
         app.UseSwaggerUI();
     }
 
+    // Initialise and seed database
+    using (var scope = app.Services.CreateScope())
+    {
+        var orderContextSeed = scope.ServiceProvider.GetRequiredService<OrderContextSeed>();
+        await orderContextSeed.InitialiseAsync();
+        await orderContextSeed.SeedAsync();
+    }
+
     app.UseHttpsRedirection();
 
     app.UseAuthorization();
@@ -35,11 +45,16 @@ try
 }
 catch (Exception ex)
 {
-    Log.Fatal(ex, "Unhandle exception");
-}
+    string type = ex.GetType().Name;
+    if (type.Equals("StopTheHostException", StringComparison.Ordinal))
+    {
+        throw;
+    }
 
+    Log.Fatal(ex, $"Unhandled exception: {ex.Message}");
+}
 finally
 {
-    Log.Information("Shut down Ordering API complete");
+    Log.Information("Shut down Product API complete");
     Log.CloseAndFlush();
 }

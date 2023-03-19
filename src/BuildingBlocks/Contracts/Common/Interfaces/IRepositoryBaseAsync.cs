@@ -19,8 +19,6 @@ namespace Contracts.Common.Interfaces
         Task<T?> GetByIdAsync(K id);
 
         Task<T?> GetByIdAsync(K id, params Expression<Func<T, object>>[] includeProperties);
-
-        Task<int> SaveChangeAsync();
     }
 
     public interface IRepositoryBaseAsync<T, K> : IRepositoryQueryBase<T, K> where T : EntityBase<K>

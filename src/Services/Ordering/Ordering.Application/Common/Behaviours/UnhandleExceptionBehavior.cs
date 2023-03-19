@@ -9,7 +9,7 @@ namespace Ordering.Application.Common.Behaviours
     {
         private readonly ILogger<TRequest> _logger;
 
-        public UnhandleExceptionBehavior(ILogger<TRequest> logger>)
+        public UnhandleExceptionBehavior(ILogger<TRequest> logger)
         {
             _logger = logger;
         }

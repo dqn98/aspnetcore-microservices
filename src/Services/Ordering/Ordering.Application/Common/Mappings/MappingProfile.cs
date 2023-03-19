@@ -7,7 +7,7 @@ namespace Ordering.Application.Common.Mappings
     {
         public MappingProfile()
         {
-            ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());1
+            ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
         public void ApplyMappingsFromAssembly(Assembly assembly)

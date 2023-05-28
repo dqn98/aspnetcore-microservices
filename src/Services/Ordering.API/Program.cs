@@ -40,6 +40,6 @@ catch (Exception ex)
 
 finally
 {
-    Log.Information("Shut down Product API complete");
+    Log.Information("Shut down Ordering API complete");
     Log.CloseAndFlush();
 }

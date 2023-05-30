@@ -1,15 +1,11 @@
-Learning how to use microservices
+## AspnetCore Microservices:
+Learning how to use microservices with .NET Core
+
 ## Prepare environment
 
 * Install dotnet core version in file `global.json`
 * IDE: Visual Studio 2022+, Rider, Visual Studio Code
 * Docker Desktop
-
-## Warning:
-
-Some docker images are not compatible with Apple Chip (M1, M2). You should replace them with appropriate images. Suggestion images below:
-- sql server: mcr.microsoft.com/azure-sql-edge
-- mysql: arm64v8/mysql:oracle
 ---
 ## How to run the project
 

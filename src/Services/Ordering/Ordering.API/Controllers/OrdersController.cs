@@ -1,9 +1,11 @@
-﻿using Contracts.Services;
+﻿using AutoMapper;
+using Contracts.Messages;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Ordering.Application.Common.Interfaces;
 using Ordering.Application.Common.Models;
 using Ordering.Application.Features.V1.Orders;
-using Shared.Services.Email;
+using Ordering.Domain.Entities;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 
@@ -14,12 +16,20 @@ namespace Ordering.API.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly ISmtpEmailService _emailService;
 
-        public OrdersController(IMediator mediator, ISmtpEmailService emailService)
+        //private readonly ISmtpEmailService _emailService;
+        private IMessageProducer _messageProducer;
+
+        private readonly IOrderRepository _orderRepository;
+        private readonly IMapper _mapper;
+
+        public OrdersController(IMediator mediator, IMessageProducer messageProducer, IOrderRepository orderRepository
+            , IMapper mapper)
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
-            _emailService = emailService;
+            _messageProducer = messageProducer;
+            _orderRepository = orderRepository;
+            _mapper = mapper;
         }
 
         public static class RouteNames
@@ -28,7 +38,7 @@ namespace Ordering.API.Controllers
         }
 
         [HttpGet("{username}", Name = RouteNames.GetOrders)]
-        [ProducesResponseType(typeof(IEnumerable<OrderDto>) , (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<OrderDto>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<OrderDto>>> GetOrdersByUserName([Required] string username)
         {
             var query = new GetOrdersQuery(username);
@@ -36,17 +46,28 @@ namespace Ordering.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> TestEmail()
+        //[HttpGet]
+        //public async Task<IActionResult> TestEmail()
+        //{
+        //    var message = new MailRequest
+        //    {
+        //        Body = "hello",
+        //        Subject = "test mail",
+        //        ToAddress = "namqd98@gmail.com"
+        //    };
+        //    await _emailService.SendEmailServices(message);
+        //    return Ok();
+        //}
+
+        [HttpPost]
+        public async Task<IActionResult> CreateOrder(OrderDto orderDto)
         {
-            var message = new MailRequest
-            {
-                Body = "hello",
-                Subject = "test mail",
-                ToAddress = "namqd98@gmail.com"
-            };
-            await _emailService.SendEmailServices(message);
-            return Ok();
+            var order = _mapper.Map<Order>(orderDto);
+            var addedOrder = await _orderRepository.CreateOrder(order);
+            await _orderRepository.SaveChangesAsync();
+            var result = _mapper.Map<OrderDto>(addedOrder);
+            _messageProducer.SendMessage(result);
+            return Ok(result);
         }
     }
 }

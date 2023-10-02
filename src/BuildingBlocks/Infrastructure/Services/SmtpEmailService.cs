@@ -20,8 +20,7 @@ namespace Infrastructure.Services
             _settings = settings ?? throw new ArgumentNullException(nameof(settings));
             _smtpClient = new SmtpClient();
         }
-
-        public async Task SendEmailServices(MailRequest request, CancellationToken cancellationToken = default)
+        public async Task SendEmailAsync(MailRequest request, CancellationToken cancellationToken = default)
         {
             var emailMessage = new MimeMessage
             {

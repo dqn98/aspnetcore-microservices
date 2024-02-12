@@ -95,6 +95,7 @@ services:
     ports:
       - "9200:9200"
     volumes:
+
       - elasticsearch_data:/usr/share/elasticsearch/data
   
   kibana:

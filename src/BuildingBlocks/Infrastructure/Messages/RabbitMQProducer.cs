@@ -1,4 +1,5 @@
 using System.Text;
+using Contracts.Common.Interfaces;
 using Contracts.Messages;
 using RabbitMQ.Client;
 
@@ -6,9 +7,9 @@ namespace Infrastructure.Messages;
 
 public class RabbitMQProducer : IMessageProducer
 {
-    private readonly ISerializeServices _serializeService;
+    private readonly ISerializeService _serializeService;
 
-    public RabbitMQProducer(ISerializeServices serializeService)
+    public RabbitMQProducer(ISerializeService serializeService)
     {
         _serializeService = serializeService;
     }

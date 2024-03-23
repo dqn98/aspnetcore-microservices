@@ -68,9 +68,8 @@ namespace Basket.API.Controllers
 
             // publish checkout event to Eventbus Message
             var eventMessage = _mapper.Map<BasketCheckoutEvent>(basketCheckout);
-            _publishEndpoint.Publish(eventMessage);
             eventMessage.TotalPrice = basket.TotalPrice;
-
+            _publishEndpoint.Publish(eventMessage);
             // remove the basket
             await _basketRepository.DeleteBasketFromUserName(basketCheckout.UserName);
 

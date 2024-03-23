@@ -23,11 +23,11 @@ namespace Contracts.Common.Interfaces
 
     public interface IRepositoryBaseAsync<T, K> : IRepositoryQueryBase<T, K> where T : EntityBase<K>
     {
-        Task<K> CreateAsync(T entity);
+        Task<T> CreateAsync(T entity);
 
         Task<IList<K>> CreateListAsync(IEnumerable<T> entities);
 
-        Task UpdateAsync(T entity);
+        Task<T> UpdateAsync(T entity);
 
         Task UpdateListAsync(IEnumerable<T> entities);
 

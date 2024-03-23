@@ -29,10 +29,10 @@ where TContext : DbContext
 
     public Task RollbackTransactionAsync() => _dbContext.Database.RollbackTransactionAsync();
 
-    public async Task<K> CreateAsync(T entity)
+    public async Task<T> CreateAsync(T entity)
     {
         await _dbContext.Set<T>().AddAsync(entity);
-        return entity.Id;
+        return entity;
     }
 
     public async Task<IList<K>> CreateListAsync(IEnumerable<T> entities)
@@ -41,14 +41,14 @@ where TContext : DbContext
         return entities.Select(x => x.Id).ToList();
     }
 
-    public Task UpdateAsync(T entity)
+    public async Task<T> UpdateAsync(T entity)
     {
-        if (_dbContext.Entry(entity).State == EntityState.Unchanged) return Task.CompletedTask;
+        if (_dbContext.Entry(entity).State == EntityState.Unchanged) return entity;
 
         T exist = _dbContext.Set<T>().Find(entity.Id);
         _dbContext.Entry(exist).CurrentValues.SetValues(entity);
 
-        return Task.CompletedTask;
+        return entity;
     }
 
     public Task UpdateListAsync(IEnumerable<T> entities) => _dbContext.Set<T>().AddRangeAsync(entities);

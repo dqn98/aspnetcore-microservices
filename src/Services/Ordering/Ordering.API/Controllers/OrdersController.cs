@@ -19,7 +19,7 @@ namespace Ordering.API.Controllers
         public OrdersController(IMediator mediator, ISmtpEmailService emailService)
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
-            _emailService = emailService;
+            _emailService = emailService ?? throw new ArgumentNullException(nameof(mediator));
         }
 
         public static class RouteNames

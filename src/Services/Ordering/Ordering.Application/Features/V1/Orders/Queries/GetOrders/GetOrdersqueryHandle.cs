@@ -19,7 +19,7 @@ namespace Ordering.Application.Features.V1.Orders
 
         public async Task<ApiResult<List<OrderDto>>> Handle(GetOrdersQuery request, CancellationToken cancellationToken)
         {
-            var orderEntities = await _repository.GetOrdersByUserName(request.UserName);
+            var orderEntities = await _repository.GetOrdersByUserNameAsync(request.UserName);
             var orderList = _mapper.Map<List<OrderDto>>(orderEntities);
 
             return new ApiSuccessResult<List<OrderDto>>(orderList);

@@ -3,12 +3,10 @@ using Basket.API.Repositories.Interfaces;
 using Contracts.Common.Interfaces;
 using EventBus.Messages.IntegrationEvents.Interfaces;
 using Infrastructure.Common;
-using Infrastructure.Configurations;
 using Infrastructure.Extensions;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Shared.Configurations;
-using System.Data;
 
 namespace Basket.API.Extensions;
 
@@ -18,7 +16,6 @@ public static class ServiceExtensions
         services.AddScoped<IBasketRepository, BasketRepository>()
             .AddTransient<ISerializeService, SerializeService>()
         ;
-
 
     internal static IServiceCollection AddConfigurationSettings(this IServiceCollection services,
         IConfiguration configuration)
@@ -62,7 +59,6 @@ public static class ServiceExtensions
             config.UsingRabbitMq((ctx, cfg) =>
             {
                 cfg.Host(mqConnection);
-
             });
             //Publish submit order message
             config.AddRequestClient<IBasketCheckoutEvent>();

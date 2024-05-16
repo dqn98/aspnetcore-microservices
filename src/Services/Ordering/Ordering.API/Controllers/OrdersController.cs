@@ -36,17 +36,24 @@ namespace Ordering.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> TestEmail()
-        {
-            var message = new MailRequest
-            {
-                Body = "hello",
-                Subject = "test mail",
-                ToAddress = "namqd98@gmail.com"
-            };
-            await _emailService.SendEmailServices(message);
-            return Ok();
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> TestEmail()
+        //{
+        //    var message = new MailRequest
+        //    {
+        //        Body = "hello",
+        //        Subject = "test mail",
+        //        ToAddress = "namqd98@gmail.com"
+        //    };
+        //    await _emailService.SendEmailServices(message);
+        //    return Ok();
+        //}
+
+        //[HttpDelete]
+
+        //public async Task<IActionResult<int>> DeleteOrders([Required] OrderDto order)
+        //{
+        //    var query = new Delte
+        //}
     }
 }

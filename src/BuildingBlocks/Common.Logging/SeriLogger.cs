@@ -15,6 +15,14 @@ public static class Serilogger
                 .WriteTo.Debug()
                 .WriteTo.Console(outputTemplate:
                     "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
+                .WriteTo.File(
+                    rollingInterval: RollingInterval.Day, 
+                    path: "D:/personal-project/Microservices/aspnetcore-microservices/logs/log-.log",
+                    outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
+                .WriteTo.File(
+                    rollingInterval: RollingInterval.Day,
+                    path: "logs/log-.log",
+                    outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
                 .Enrich.FromLogContext()
                 .Enrich.WithMachineName()
                 .Enrich.WithProperty("Environment", environmentName)

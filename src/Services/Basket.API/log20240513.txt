@@ -1,0 +1,41 @@
+2024-05-13 12:48:59.787 +07:00 [DBG] Starting bus instances: IBus
+2024-05-13 12:48:59.826 +07:00 [DBG] Starting bus: "rabbitmq://localhost/"
+2024-05-13 12:48:59.881 +07:00 [DBG] Connect: guest@localhost:5672/
+2024-05-13 12:48:59.910 +07:00 [INF] Now listening on: http://localhost:5004
+2024-05-13 12:48:59.913 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-05-13 12:48:59.915 +07:00 [INF] Hosting environment: Development
+2024-05-13 12:48:59.918 +07:00 [INF] Content root path: D:\personal-project\Microservices\aspnetcore-microservices\src\Services\Basket.API\
+2024-05-13 12:49:00.087 +07:00 [DBG] Connected: guest@localhost:5672/ (address: amqp://localhost:5672, local: 53028)
+2024-05-13 12:49:00.128 +07:00 [DBG] Endpoint Ready: "rabbitmq://localhost/NAMDINH_BasketAPI_bus_py5oyyfrw9h8mk7qbdq8grdn84?temporary=true"
+2024-05-13 12:49:00.146 +07:00 [INF] Bus started: "rabbitmq://localhost/"
+2024-05-13 12:49:15.456 +07:00 [INF] BEGIN: GetBasketByUserName customer1
+2024-05-13 12:49:15.811 +07:00 [INF] END: GetBasketByUserName customer1
+2024-05-13 12:49:29.593 +07:00 [INF] BEGIN: UpdateBasket for customer1
+2024-05-13 12:49:29.803 +07:00 [INF] END: UpdateBasket for customer1
+2024-05-13 12:49:29.805 +07:00 [INF] BEGIN: GetBasketByUserName customer1
+2024-05-13 12:49:29.812 +07:00 [INF] END: GetBasketByUserName customer1
+2024-05-13 12:49:34.485 +07:00 [INF] BEGIN: GetBasketByUserName customer1
+2024-05-13 12:49:34.494 +07:00 [INF] END: GetBasketByUserName customer1
+2024-05-13 12:50:02.982 +07:00 [INF] BEGIN: GetBasketByUserName customer1
+2024-05-13 12:50:02.989 +07:00 [INF] END: GetBasketByUserName customer1
+2024-05-13 12:50:03.106 +07:00 [DBG] Declare exchange: name: EventBus.Messages.IntegrationEvents.Events:BasketCheckoutEvent, type: fanout, durable
+2024-05-13 12:50:03.110 +07:00 [DBG] Declare exchange: name: EventBus.Messages.IntegrationEvents.Interfaces:IBasketCheckoutEvent, type: fanout, durable
+2024-05-13 12:50:03.112 +07:00 [DBG] Declare exchange: name: EventBus.Messages.IntegrationEvents:IIntegrationEvent, type: fanout, durable
+2024-05-13 12:50:03.113 +07:00 [DBG] Declare exchange: name: EventBus.Messages.IntegrationEvents:IntegrationBaseEvent, type: fanout, durable
+2024-05-13 12:50:03.120 +07:00 [INF] BEGIN: DeleteBasketFromUserName customer1
+2024-05-13 12:50:03.125 +07:00 [INF] END: DeleteBasketFromUserName customer1
+2024-05-13 12:50:03.147 +07:00 [DBG] Bind exchange: source: EventBus.Messages.IntegrationEvents.Events:BasketCheckoutEvent, destination: EventBus.Messages.IntegrationEvents.Interfaces:IBasketCheckoutEvent
+2024-05-13 12:50:03.152 +07:00 [DBG] Bind exchange: source: EventBus.Messages.IntegrationEvents.Events:BasketCheckoutEvent, destination: EventBus.Messages.IntegrationEvents:IIntegrationEvent
+2024-05-13 12:50:03.155 +07:00 [DBG] Bind exchange: source: EventBus.Messages.IntegrationEvents.Events:BasketCheckoutEvent, destination: EventBus.Messages.IntegrationEvents:IntegrationBaseEvent
+2024-05-13 12:50:03.271 +07:00 [DBG] SEND "rabbitmq://localhost/EventBus.Messages.IntegrationEvents.Events:BasketCheckoutEvent" "68370000-a4a7-f875-fba2-08dc731088bf" EventBus.Messages.IntegrationEvents.Events.BasketCheckoutEvent
+2024-05-13 12:52:37.057 +07:00 [INF] Application is shutting down...
+2024-05-13 12:52:37.068 +07:00 [DBG] Stopping bus instances: IBus
+2024-05-13 12:52:37.079 +07:00 [DBG] Stopping bus: "rabbitmq://localhost/"
+2024-05-13 12:52:37.090 +07:00 [DBG] Endpoint Stopping: "rabbitmq://localhost/NAMDINH_BasketAPI_bus_py5oyyfrw9h8mk7qbdq8grdn84?temporary=true"
+2024-05-13 12:52:37.098 +07:00 [DBG] Stopping receive transport: "rabbitmq://localhost/NAMDINH_BasketAPI_bus_py5oyyfrw9h8mk7qbdq8grdn84?temporary=true"
+2024-05-13 12:52:37.099 +07:00 [DBG] Endpoint Completed: "rabbitmq://localhost/NAMDINH_BasketAPI_bus_py5oyyfrw9h8mk7qbdq8grdn84?temporary=true"
+2024-05-13 12:52:37.110 +07:00 [DBG] Stopping send transport: EventBus.Messages.IntegrationEvents.Events:BasketCheckoutEvent
+2024-05-13 12:52:37.148 +07:00 [DBG] Disconnect: guest@localhost:5672/
+2024-05-13 12:52:37.159 +07:00 [DBG] Disconnected: guest@localhost:5672/
+2024-05-13 12:52:37.163 +07:00 [INF] Bus stopped: "rabbitmq://localhost/"
+2024-05-13 12:52:37.181 +07:00 [INF] Shut down Basket.API complete

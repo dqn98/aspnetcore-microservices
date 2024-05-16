@@ -1,0 +1,89 @@
+2024-05-13 12:39:33.752 +07:00 [INF] Entity Framework Core 6.0.6 initialized 'OrderContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.6' with options: MigrationsAssembly=Ordering.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null 
+2024-05-13 12:39:34.646 +07:00 [INF] Executed DbCommand (95ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-05-13 12:39:34.777 +07:00 [INF] Executed DbCommand (67ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2024-05-13 12:39:34.794 +07:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-05-13 12:39:34.809 +07:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2024-05-13 12:39:34.882 +07:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2024-05-13 12:39:34.937 +07:00 [INF] No migrations were applied. The database is already up to date.
+2024-05-13 12:39:35.506 +07:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Orders] AS [o]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-05-13 12:39:35.906 +07:00 [INF] Configured endpoint basket-checkout-event-handler, Consumer: Ordering.API.Application.IntergrationEvents.EventHandler.BasketCheckoutEventHandler
+2024-05-13 12:39:36.301 +07:00 [INF] Now listening on: http://localhost:5293
+2024-05-13 12:39:36.309 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-05-13 12:39:36.314 +07:00 [INF] Hosting environment: Development
+2024-05-13 12:39:36.322 +07:00 [INF] Content root path: D:\personal-project\Microservices\aspnetcore-microservices\src\Services\Ordering\Ordering.API\
+2024-05-13 12:39:36.750 +07:00 [INF] Bus started: "rabbitmq://localhost/"
+2024-05-13 12:39:37.299 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5293/swagger/index.html - -
+2024-05-13 12:43:50.804 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5293/swagger/index.html - -
+2024-05-13 12:43:50.959 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5293/swagger/index.html - - - 200 - text/html;charset=utf-8 154.7266ms
+2024-05-13 12:43:51.008 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5293/_vs/browserLink - -
+2024-05-13 12:43:51.056 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5293/_framework/aspnetcore-browser-refresh.js - -
+2024-05-13 12:43:51.074 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5293/_framework/aspnetcore-browser-refresh.js - - - 200 12356 application/javascript;+charset=utf-8 17.3154ms
+2024-05-13 12:43:51.102 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5293/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 93.9865ms
+2024-05-13 12:43:51.368 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5293/swagger/v1/swagger.json - -
+2024-05-13 12:43:51.547 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5293/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 178.7490ms
+2024-05-13 12:47:32.074 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5293/swagger/v1/swagger.json - -
+2024-05-13 12:47:32.097 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5293/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 22.4395ms
+2024-05-13 12:47:32.423 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5293/favicon.ico - -
+2024-05-13 12:47:32.440 +07:00 [WRN] Failed to determine the https port for redirect.
+2024-05-13 12:47:32.448 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5293/favicon.ico - - - 404 0 - 25.0761ms
+2024-05-13 12:50:29.631 +07:00 [INF] BEGIN: CreateOrderCommandHandler - UserName: customer1
+2024-05-13 12:50:37.586 +07:00 [INF] Entity Framework Core 6.0.6 initialized 'OrderContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.6' with options: MigrationsAssembly=Ordering.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null 
+2024-05-13 12:50:47.427 +07:00 [INF] Executed DbCommand (59ms) [Parameters=[@p0='?' (DbType = DateTimeOffset), @p1='?' (Size = 250), @p2='?' (Size = 50), @p3='?' (Size = 4000), @p4='?' (DbType = DateTimeOffset), @p5='?' (Size = 250), @p6='?' (Size = 4000), @p7='?' (DbType = Int32), @p8='?' (Precision = 10) (Scale = 2) (DbType = Decimal), @p9='?' (Size = 150)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Orders] ([CreatedDate], [EmailAddress], [FirstName], [InvoiceAddress], [LastModifiedDate], [LastName], [ShippingAddress], [Status], [TotalPrice], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [Orders]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+2024-05-13 12:50:48.693 +07:00 [INF] Order: 2 is successfully created.
+2024-05-13 12:50:50.355 +07:00 [INF] END: CreateOrderCommandHandler - UserName: customer1
+2024-05-13 12:51:14.221 +07:00 [WRN] Application long running request: CreateOrderCommand (43166 miliseconds {"UserName":"customer1","TotalPrice":6000.0,"FirstName":"Nam","LastName":"Dinh","EmailAddress":"namqd98@gmail.com","ShippingAddress":"Ho Chi Minh","InvoiceAddress":"Vietnam","$type":"CreateOrderCommand"}
+2024-05-13 12:51:18.839 +07:00 [INF] BasketCheckoutEvent consummed successfully. Order is createcd with Id: 2
+2024-05-13 12:58:40.205 +07:00 [INF] Entity Framework Core 6.0.6 initialized 'OrderContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.6' with options: MigrationsAssembly=Ordering.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null 
+2024-05-13 12:58:41.177 +07:00 [INF] Executed DbCommand (98ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-05-13 12:58:41.348 +07:00 [INF] Executed DbCommand (90ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2024-05-13 12:58:41.366 +07:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-05-13 12:58:41.384 +07:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2024-05-13 12:58:41.477 +07:00 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2024-05-13 12:58:41.664 +07:00 [INF] No migrations were applied. The database is already up to date.
+2024-05-13 12:58:43.023 +07:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Orders] AS [o]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-05-13 12:58:43.720 +07:00 [INF] Configured endpoint basket-checkout-event-handler, Consumer: Ordering.API.Application.IntergrationEvents.EventHandler.BasketCheckoutEventHandler
+2024-05-13 12:58:44.204 +07:00 [INF] Now listening on: http://localhost:5293
+2024-05-13 12:58:44.213 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-05-13 12:58:44.230 +07:00 [INF] Hosting environment: Development
+2024-05-13 12:58:44.237 +07:00 [INF] Content root path: D:\personal-project\Microservices\aspnetcore-microservices\src\Services\Ordering\Ordering.API\
+2024-05-13 12:58:45.007 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5293/swagger/index.html - -
+2024-05-13 12:58:45.048 +07:00 [INF] Bus started: "rabbitmq://localhost/"
+2024-05-13 12:58:45.722 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5293/swagger/index.html - - - 200 - text/html;charset=utf-8 739.6852ms
+2024-05-13 12:58:45.828 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5293/_vs/browserLink - -
+2024-05-13 12:58:45.838 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5293/_framework/aspnetcore-browser-refresh.js - -
+2024-05-13 12:58:45.871 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5293/_framework/aspnetcore-browser-refresh.js - - - 200 12356 application/javascript;+charset=utf-8 33.3685ms
+2024-05-13 12:58:45.934 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5293/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 106.3740ms
+2024-05-13 12:58:46.374 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5293/swagger/v1/swagger.json - -
+2024-05-13 12:58:47.493 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5293/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 1118.0303ms

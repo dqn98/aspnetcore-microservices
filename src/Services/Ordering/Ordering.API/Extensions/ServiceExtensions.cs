@@ -25,9 +25,10 @@ namespace Ordering.API.Extensions
 
         public static void ConfigureMassTransit(this IServiceCollection services)
         {
-            var settings = services.GetOptions<EventBusSettings>(nameof(EventBusSettings));
+            var settings = services.GetOptions<EventBusSettings>("EventBusSettings");
             if (settings == null || string.IsNullOrEmpty(settings.HostAddress))
-                throw new ArgumentNullException($"{nameof(EventBusSettings)} is not configured.");
+                throw new ArgumentNullException("EventBusSetting is not configured");
+
             var mqConnection = new Uri(settings.HostAddress);
             services.TryAddSingleton(KebabCaseEndpointNameFormatter.Instance);
             services.AddMassTransit(config =>
@@ -36,14 +37,13 @@ namespace Ordering.API.Extensions
                 config.UsingRabbitMq((ctx, cfg) =>
                 {
                     cfg.Host(mqConnection);
-                    //cfg.ReceiveEndpoint("basket-checkout-queue", cfg =>
-                    //{
+                    // cfg.ReceiveEndpoint("basket-checkout-queue", c =>
+                    // {
+                    //     c.ConfigureConsumer<BasketCheckoutEventHandler>(ctx);
+                    // });
 
-                    //});
                     cfg.ConfigureEndpoints(ctx);
                 });
-                //Publish submit order message
-                //config.AddRequestClient<IBasketCheckoutEvent>();
             });
         }
     }

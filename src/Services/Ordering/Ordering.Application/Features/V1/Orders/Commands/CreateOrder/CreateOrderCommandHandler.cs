@@ -34,7 +34,7 @@ namespace Ordering.Application.Features.V1.Orders
             await _orderRepository.SaveChangesAsync();
             _logger.Information($"Order: {addedOrder.Id} is successfully created.");
 
-            SendEmalService(addedOrder, cancellationToken);
+            //SendEmalService(addedOrder, cancellationToken);
 
             _logger.Information($"END: {MethodName} - UserName: {request.UserName}");
             return new ApiSuccessResult<long>(addedOrder.Id);

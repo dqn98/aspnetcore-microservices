@@ -26,9 +26,9 @@ namespace Ordering.Application.Features.V1.Orders.Commands.DeleteOrder
             if (orderEntity == null) throw new NotFoundException(nameof(Order), request.Id);
 
             _logger.Information($"BEGIN: {MethodName} - Order: {orderEntity.Id}");
-            _orderRepository.DeleteAsync(orderEntity);
-
-            _orderRepository.SaveChangesAsync();
+            _orderRepository.Delete(orderEntity);
+            orderEntity.DeletedOrder();
+            await _orderRepository.SaveChangesAsync() ;
             _logger.Information($"Order {request.Id} was successfully deleted.");
 
             _logger.Information($"END: {MethodName} - Order: {orderEntity.Id}");

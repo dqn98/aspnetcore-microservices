@@ -23,16 +23,22 @@ namespace Contracts.Common.Interfaces
 
     public interface IRepositoryBaseAsync<T, K> : IRepositoryQueryBase<T, K> where T : EntityBase<K>
     {
+        void Create(T entity);
         Task<T> CreateAsync(T entity);
 
+        void CreateList(IEnumerable<T> entities);
         Task<IList<K>> CreateListAsync(IEnumerable<T> entities);
 
+        void Update(T entity);
         Task<T> UpdateAsync(T entity);
 
+        void UpdateLists(IEnumerable<T> entities);
         Task UpdateListAsync(IEnumerable<T> entities);
 
+        void Delete(T entity);
         Task DeleteAsync(T entity);
 
+        void DeleteList(IEnumerable<T> entities);
         Task DeleteListAsync(IEnumerable<T> entities);
 
         Task<int> SaveChangesAsync();

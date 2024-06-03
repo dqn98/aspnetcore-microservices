@@ -66,4 +66,33 @@ where TContext : DbContext
     }
 
     public Task<int> SaveChangesAsync() => _unitOfWork.CommitAsync();
+
+    public void Create(T entity)
+    {
+        _dbContext.Set<T>().Add(entity);
+    }
+
+    public void CreateList(IEnumerable<T> entities)
+    {
+        _dbContext.Set<T>().AddRange(entities);
+    }
+    public void Update(T entity)
+    {
+        _dbContext.Set<T>().Update(entity);
+    }
+
+    public void UpdateLists(IEnumerable<T> entities)
+    {
+        _dbContext.Set<T>().UpdateRange(entities);
+    }
+
+    public void Delete(T entity)
+    {
+        _dbContext.Set<T>().Remove(entity);
+    }
+
+    public void DeleteList(IEnumerable<T> entities)
+    {
+        _dbContext.Set<T>().RemoveRange(entities);
+    }
 }

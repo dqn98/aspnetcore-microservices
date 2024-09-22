@@ -7,6 +7,7 @@ namespace Ordering.Application.Common.Models
     {
         public long Id { get; set; }
         public string UserName { get; set; }
+        public Guid DocumentNo { get; set; }
         public decimal TotalPrice { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

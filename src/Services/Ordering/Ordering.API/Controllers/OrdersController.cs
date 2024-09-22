@@ -3,9 +3,11 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Ordering.Application.Common.Models;
 using Ordering.Application.Features.V1.Orders;
+using Shared.SeedWork;
 using Shared.Services.Email;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Ordering.API.Controllers
 {
@@ -25,6 +27,8 @@ namespace Ordering.API.Controllers
         public static class RouteNames
         {
             public const string GetOrders = nameof(GetOrders);
+            public const string CreateOrder = nameof(CreateOrder);
+            public const string DeleteOrder = nameof(DeleteOrder);
         }
 
         [HttpGet("{username}", Name = RouteNames.GetOrders)]
@@ -36,17 +40,22 @@ namespace Ordering.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> TestEmail()
+        [HttpDelete("{id:long}", Name = RouteNames.DeleteOrder)]
+        [ProducesResponseType(typeof(NoContentResult), (int)HttpStatusCode.NoContent)]
+        public async Task<IActionResult> DeleteOrder([Required] long id)
         {
-            var message = new MailRequest
-            {
-                Body = "hello",
-                Subject = "test mail",
-                ToAddress = "namqd98@gmail.com"
-            };
-            await _emailService.SendEmailServices(message);
-            return Ok();
+            var command = new DeleteOrderCommand(id);
+            await _mediator.Send(command);
+
+            return NoContent();
+        }
+
+        [HttpPost(Name = RouteNames.CreateOrder)]
+        [ProducesResponseType(typeof(ApiResult<long>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> CreateOrder([FromBody] CreateOrderCommand createOrderCommand)
+        {
+            var result = await _mediator.Send(createOrderCommand);
+            return Ok(result);
         }
     }
 }

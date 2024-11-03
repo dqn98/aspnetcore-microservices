@@ -22,7 +22,7 @@ public class InventoryEntry : MongoEntity
     public string DocumentNo { get; set; }
     
     [BsonElement("itemNo")]
-    public string ItemNo { get; set; }
+    public string? ItemNo { get; set; }
     
     [BsonElement("quantity")]
     public int Quantity { get; set; }
